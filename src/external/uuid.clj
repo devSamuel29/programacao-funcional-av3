@@ -1,4 +1,4 @@
 (ns external.uuid)
 
-(defn genarate-uuid []
+(defn generate-uuid []
   (str (java.util.UUID/randomUUID)))

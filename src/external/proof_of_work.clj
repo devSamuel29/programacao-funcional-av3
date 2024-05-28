@@ -7,7 +7,7 @@
   ([data difficulty]
    (proof-of-work data difficulty 0))
   ([data difficulty nonce]
-   (let [hash (sha-256 (str data nonce))
+   (let [hash (sha-256 (str nonce data))
          target (apply str (repeat difficulty "0"))]
      (if (.startsWith hash target)
        {:nonce nonce :hash hash}
