@@ -1,13 +1,15 @@
 (ns backend.handler
   (:require [compojure.core :refer [defroutes]]
             [compojure.route :as route]
+            [controllers.blockchain-controller :refer [blockchain-routes]]
             [controllers.financial-controller :refer [financial-routes]]
-            [ring.middleware.json :refer [wrap-json-body]]
             [ring.middleware.cors :refer [wrap-cors]]
-            [ring.middleware.defaults :refer [wrap-defaults api-defaults]]))
+            [ring.middleware.defaults :refer [api-defaults wrap-defaults]]
+            [ring.middleware.json :refer [wrap-json-body]]))
 
 (defroutes app-routes
   financial-routes
+  blockchain-routes
   (route/not-found "Not Found"))
 
 (def app
