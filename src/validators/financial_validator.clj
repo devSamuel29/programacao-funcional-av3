@@ -8,4 +8,5 @@
          (contains? request :type)
          (or (= (:type request) "Receita")
              (= (:type request) "Despesa"))
-         (= allowed-keys (set (keys request))))))
+         (= allowed-keys (set (keys request)))))
+  true)

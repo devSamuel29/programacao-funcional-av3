@@ -9,6 +9,3 @@
 (defn create-transaction [request]
   (let [transaction (assoc request :id (generate-uuid))]
     (swap! transactions conj transaction)))
-
-(defn delete-transactions []
-  (reset! transactions []))
