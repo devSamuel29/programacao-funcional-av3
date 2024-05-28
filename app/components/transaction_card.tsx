@@ -1,7 +1,7 @@
 interface ITransaction {
     id: string
     value: string
-    transactionType: string
+    type: string
 }
 
 interface TransactionCardProps {
@@ -17,13 +17,13 @@ export default function TransactionCard({
                 <li
                     key={transaction.id}
                     className={`flex flex-col border min-w-[100px] ${
-                        transaction.transactionType === 'Despesa'
+                        transaction.type === 'Despesa'
                             ? 'border-red-500'
                             : 'border-green-500'
                     } rounded-md p-4 m-2 shadow-md`}
                 >
                     <span>{Number(transaction.value).toFixed(2)}</span>
-                    <span>{transaction.transactionType}</span>
+                    <span>{transaction.type}</span>
                 </li>
             ))}
         </ul>

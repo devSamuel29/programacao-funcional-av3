@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import TransactionCard from './components/card'
+import TransactionCard from './components/transaction_card'
 import {
     createTransaction,
     readTransactions,
@@ -11,7 +11,7 @@ import {
 
 const schema = z.object({
     value: z.string().refine((val) => parseFloat(val)),
-    transactionType: z.string().min(1),
+    type: z.string().min(1),
 })
 
 export default function Index() {
@@ -122,7 +122,7 @@ export default function Index() {
                     className="p-3 bg-slate-100 rounded-md outline-none"
                 />
                 <select
-                    {...register('transactionType')}
+                    {...register('type')}
                     defaultValue=""
                     className="p-3 bg-slate-100 rounded-md w-full"
                 >

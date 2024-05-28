@@ -1,5 +1,5 @@
 export async function readTransactions() {
-    const response = await fetch('http://localhost:3000/read-finances')
+    const response = await fetch('http://localhost:3000/read-transactions')
     if (!response.ok) {
         throw new Error('Failed to fetch transactions')
     }
@@ -8,7 +8,7 @@ export async function readTransactions() {
 }
 
 export async function createTransaction(data: Object) {
-    const response = await fetch('http://localhost:3000/create-finance', {
+    const response = await fetch('http://localhost:3000/create-transaction', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
