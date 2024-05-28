@@ -1,5 +1,5 @@
 (ns repositories.financial-repository
-  (:require [external.uuid :refer [genarate-uuid]]))
+  (:require [external.uuid :refer [generate-uuid]]))
 
 (defonce ^:private transactions (atom []))
 
@@ -7,7 +7,7 @@
   @transactions)
 
 (defn create-transaction [request]
-  (let [transaction (assoc request :id (genarate-uuid))]
+  (let [transaction (assoc request :id (generate-uuid))]
     (swap! transactions conj transaction)))
 
 (defn delete-transactions []

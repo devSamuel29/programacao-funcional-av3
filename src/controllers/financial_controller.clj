@@ -3,11 +3,14 @@
             [external.json :refer [as-json]]
             [repositories.financial-repository :refer [create-transaction
                                                        delete-transactions
-                                                       read-transactions]]))
+                                                       read-transactions]]
+            [validators.financial-validator :refer [valid-transaction?]]))
 
 (defroutes financial-routes
-  (GET "/read-finances" [] (-> (read-transactions)
-                               (as-json)))
-  (POST "/create-finance" request (-> (create-transaction (:body request))
-                                      (as-json)))
-  (DELETE "/delete-finances" [] (delete-transactions)))
+  (GET "/read-transactions" [] (-> (read-transactions)
+                                   (as-json)))
+  (POST "/create-transaction" request
+    (if (valid-transaction? (:body request)) (-> (create-transaction (:body request))
+                                                 (as-json))
+        (as-json {:message "Bad Request"} 400)))
+  (DELETE "/delete-transactions" [] (delete-transactions)))
