@@ -18,5 +18,6 @@
         proof-of-work (if (nil? previous-block)
                         (proof-of-work request)
                         (proof-of-work (str previous-hash request)))
-        block (assoc proof-of-work :id id :previous_hash previous-hash)]
+        transactions (:transactions request)
+        block (assoc proof-of-work :id id :previous_hash previous-hash :transactions transactions)]
     (swap! blocks conj block)))
