@@ -10,8 +10,7 @@ export default function Blockchain() {
     const [buttonText, setButtonText] = useState('Minerar bloco')
     const [buttonColor, setButtonColor] = useState('bg-blue-500')
 
-    const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault()
+    const onSubmit = async () => {
         setIsLoading(true)
         setButtonColor('bg-red-500')
         try {
@@ -21,23 +20,37 @@ export default function Blockchain() {
             setButtonText('Minerado')
             setButtonColor('bg-green-500')
         } catch (error) {
-            console.error('Error mining block:', error)
+            throw new Error()
         } finally {
             setIsLoading(false)
         }
     }
 
     useEffect(() => {
+        let isMounted = true
+
         const fetchBlocks = async () => {
             try {
                 const response = await readBlocks()
-                setBlocks(response)
+                if (isMounted) {
+                    if (response.length === 0) {
+                        onSubmit()
+                    } else {
+                        setBlocks(response)
+                    }
+                }
             } catch (error) {
-                setBlocks([])
+                if (isMounted) {
+                    console.error('Erro ao buscar blocos:', error)
+                }
             }
         }
 
         fetchBlocks()
+
+        return () => {
+            isMounted = false
+        }
     }, [])
 
     useEffect(() => {
@@ -52,10 +65,7 @@ export default function Blockchain() {
 
     return (
         <main className="flex flex-col justify-center items-center h-screen">
-            <form
-                onSubmit={onSubmit}
-                className="flex flex-col items-center space-y-10"
-            >
+            <article className="flex flex-col items-center space-y-10">
                 {blocks.length > 0 ? (
                     <BlockCard blocks={blocks} />
                 ) : (
@@ -71,10 +81,11 @@ export default function Blockchain() {
                     }`}
                     type="submit"
                     disabled={isLoading || isMined}
+                    onClick={onSubmit}
                 >
                     {isLoading ? 'Minerando' : buttonText}
                 </button>
-            </form>
+            </article>
         </main>
     )
 }

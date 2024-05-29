@@ -5,13 +5,16 @@ export async function readBlocks() {
     if (!response.ok) {
         throw new Error('Failed to fetch transactions')
     }
-    const data = await response.json()
-    return data
+
+    return await response.json()
 }
 
 export async function mineBlock() {
     const transactions = await readTransactions()
-    const body = JSON.stringify({ data: transactions })
+    const body = JSON.stringify({
+        data: transactions,
+        transactions: transactions,
+    })
     const response = await fetch('http://localhost:3000/create-block', {
         method: 'POST',
         headers: {
