@@ -8,6 +8,7 @@ import {
     createTransaction,
     readTransactions,
 } from './data-sources/transactions'
+import Link from 'next/link'
 
 const schema = z.object({
     value: z.string().refine((val) => parseFloat(val)),
@@ -112,6 +113,12 @@ export default function Index() {
 
     return (
         <main className="flex flex-col justify-center items-center h-screen">
+            <Link
+                href="/blockchain"
+                className="mb-4 underline text-blue-500 hover:brightness-75"
+            >
+                Clique aqui para ir a Blockchain
+            </Link>
             <form
                 onSubmit={handleSubmit(onSubmit, onInvalid)}
                 className={`flex flex-col space-y-4 border-2 ${borderColor} items-center rounded-md p-20 shadow-md transition duration-500`}

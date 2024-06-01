@@ -12,7 +12,7 @@ export default function TransactionCard({
     transactions,
 }: TransactionCardProps) {
     return (
-        <ul className="flex space-x-10 overflow-x-auto w-[30%] absolute bottom-0 mb-32 py-6">
+        <ul className="flex space-x-10 overflow-x-auto justify-center w-[30%] absolute bottom-0 mb-32 py-6">
             {transactions.map((transaction) => (
                 <li
                     key={transaction.id}

@@ -1,7 +1,8 @@
 'use client'
-import { FormEvent, useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import BlockCard from '../components/block_card'
 import { mineBlock, readBlocks } from '../data-sources/blockchain'
+import Link from 'next/link'
 
 export default function Blockchain() {
     const [blocks, setBlocks] = useState([])
@@ -20,7 +21,13 @@ export default function Blockchain() {
             setButtonText('Minerado')
             setButtonColor('bg-green-500')
         } catch (error) {
-            throw new Error()
+            console.error('Erro ao minerar bloco:', error)
+            setButtonText('Erro no servidor!')
+            setButtonColor('bg-red-500')
+            setTimeout(() => {
+                setButtonText('Minerar bloco')
+                setButtonColor('bg-blue-500')
+            }, 2000)
         } finally {
             setIsLoading(false)
         }
@@ -32,6 +39,7 @@ export default function Blockchain() {
         const fetchBlocks = async () => {
             try {
                 const response = await readBlocks()
+
                 if (isMounted) {
                     if (response.length === 0) {
                         onSubmit()
@@ -65,6 +73,12 @@ export default function Blockchain() {
 
     return (
         <main className="flex flex-col justify-center items-center h-screen">
+            <Link
+                href="/"
+                className="mb-4 underline text-blue-500 hover:brightness-75"
+            >
+                Clique aqui para ir ao Financeiro
+            </Link>
             <article className="flex flex-col items-center space-y-10">
                 {blocks.length > 0 ? (
                     <BlockCard blocks={blocks} />

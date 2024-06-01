@@ -43,14 +43,8 @@ export default function BlockCard({ blocks }: IBlockCardProps) {
                                 block.transactions.map((transaction) => (
                                     <li
                                         key={transaction.id}
-                                        className="border-t p-2 text-lg"
+                                        className="border-t p-2 text-lg w-[300px]"
                                     >
-                                        <section className="space-x-3">
-                                            <span className="font-semibold">
-                                                Id:
-                                            </span>
-                                            <span>{transaction.id}</span>
-                                        </section>
                                         <section className="space-x-3">
                                             <span className="font-semibold">
                                                 Valor:
