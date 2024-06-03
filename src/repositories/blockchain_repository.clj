@@ -13,7 +13,7 @@
         previous-block (when (> block-count 0) (last @blocks))
         previous-hash (if previous-block
                         (:hash previous-block)
-                        "Bloco gênesis")
+                        nil)
         proof-of-work (if (nil? previous-block)
                         (proof-of-work request)
                         (proof-of-work (str previous-hash request)))
