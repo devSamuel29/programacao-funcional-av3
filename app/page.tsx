@@ -162,17 +162,14 @@ export default function Index() {
                         : 'Ver todas as transações'}
                 </button>
             </form>
-            {showTransactions && (
-                <>
-                    {transactions.length > 0 ? (
-                        <TransactionCard transactions={transactions} />
-                    ) : (
-                        <span className="absolute bottom-0 mb-32 text-gray-300">
-                            Nenhuma transação para mostrar
-                        </span>
-                    )}
-                </>
-            )}
+            {showTransactions &&
+                (transactions.length > 0 ? (
+                    <TransactionCard transactions={transactions} />
+                ) : (
+                    <span className="absolute bottom-0 mb-32 text-gray-300">
+                        Nenhuma transação para mostrar
+                    </span>
+                ))}
         </main>
     )
 }

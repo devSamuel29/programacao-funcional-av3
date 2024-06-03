@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react'
+
 export interface ITransaction {
     id: string
     value: string
@@ -11,16 +13,27 @@ interface TransactionCardProps {
 export default function TransactionCard({
     transactions,
 }: TransactionCardProps) {
+    const listRef = useRef<HTMLUListElement>(null)
+
+    useEffect(() => {
+        if (listRef.current) {
+            listRef.current.scrollLeft = listRef.current.scrollWidth
+        }
+    }, [transactions])
+
     return (
-        <ul className="flex space-x-10 overflow-x-auto justify-center w-[30%] absolute bottom-0 mb-32 py-6">
+        <ul
+            ref={listRef}
+            className="flex absolute bottom-0 mb-8 space-x-10 overflow-x-auto justify-start w-[500px] py-6"
+        >
             {transactions.map((transaction) => (
                 <li
                     key={transaction.id}
-                    className={`flex flex-col border min-w-[100px] ${
+                    className={`flex flex-col border ${
                         transaction.type === 'Despesa'
                             ? 'border-red-500'
                             : 'border-green-500'
-                    } rounded-md p-4 m-2 shadow-md`}
+                    } rounded-md p-4 shadow-md`}
                 >
                     <span>{Number(transaction.value).toFixed(2)}</span>
                     <span>{transaction.type}</span>

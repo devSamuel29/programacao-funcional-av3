@@ -34,34 +34,6 @@ export default function Blockchain() {
     }
 
     useEffect(() => {
-        let isMounted = true
-
-        const fetchBlocks = async () => {
-            try {
-                const response = await readBlocks()
-
-                if (isMounted) {
-                    if (response.length === 0) {
-                        onSubmit()
-                    } else {
-                        setBlocks(response)
-                    }
-                }
-            } catch (error) {
-                if (isMounted) {
-                    console.error('Erro ao buscar blocos:', error)
-                }
-            }
-        }
-
-        fetchBlocks()
-
-        return () => {
-            isMounted = false
-        }
-    }, [])
-
-    useEffect(() => {
         if (isMined) {
             setTimeout(() => {
                 setIsMined(false)
@@ -70,6 +42,14 @@ export default function Blockchain() {
             }, 2000)
         }
     }, [isMined])
+
+    useEffect(() => {
+        const onLoad = async () => {
+            const response = await readBlocks()
+            setBlocks(response)
+        }
+        onLoad()
+    }, [])
 
     return (
         <main className="flex flex-col justify-center items-center h-screen">
