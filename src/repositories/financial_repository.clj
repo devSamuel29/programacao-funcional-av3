@@ -1,7 +1,6 @@
 (ns repositories.financial-repository
-  (:require [external.uuid :refer [generate-uuid]]))
-
-(defonce ^:private transactions (atom []))
+  (:require [databases.db :refer [transactions]]
+            [external.uuid :refer [generate-uuid]]))
 
 (defn read-transactions []
   @transactions)

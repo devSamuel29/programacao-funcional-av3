@@ -3,10 +3,8 @@
 (defn valid-transaction? [request]
   (let [allowed-keys #{:value :type}]
     (and (contains? request :value)
-         (number? (:value request))
-         (pos? (:value request))
+         (pos? (Double/parseDouble (:value request)))
          (contains? request :type)
          (or (= (:type request) "Receita")
              (= (:type request) "Despesa"))
-         (= allowed-keys (set (keys request)))))
-  true)
+         (= allowed-keys (set (keys request))))))

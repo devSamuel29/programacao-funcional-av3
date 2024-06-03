@@ -9,6 +9,7 @@
   (GET "/read-transactions" [] (-> (read-transactions)
                                    (as-json)))
   (POST "/create-transaction" request
-    (if (valid-transaction? (:body request)) (-> (create-transaction (:body request))
-                                                 (as-json))
-        (as-json {:message "Bad Request"} 400))))
+    (if (valid-transaction? (:body request))
+      (-> (create-transaction (:body request))
+          (as-json))
+      (as-json {:message "Bad Request"} 400))))

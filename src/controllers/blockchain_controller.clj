@@ -9,7 +9,8 @@
   (GET "/read-blocks" [] (-> (read-blocks)
                              (as-json)))
   (POST "/create-block" request
-    (if (valid-block? (:body request)) (->
-                                        (create-block (:body request))
-                                        (as-json))
-        (as-json {:message "Bad Request"} 400))))
+    (if (valid-block? (:body request))
+      (->
+       (create-block (:body request))
+       (as-json))
+      (as-json {:message "Bad Request"} 400))))

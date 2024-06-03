@@ -1,7 +1,6 @@
 (ns repositories.blockchain-repository
-  (:require [external.proof-of-work :refer [proof-of-work]]))
-
-(defonce ^:private blocks (atom []))
+  (:require [databases.db :refer [blocks]]
+            [external.proof-of-work :refer [proof-of-work]]))
 
 (def id-counter (atom -1))
 
@@ -14,7 +13,7 @@
         previous-block (when (> block-count 0) (last @blocks))
         previous-hash (if previous-block
                         (:hash previous-block)
-                        nil)
+                        "Bloco gênesis")
         proof-of-work (if (nil? previous-block)
                         (proof-of-work request)
                         (proof-of-work (str previous-hash request)))
