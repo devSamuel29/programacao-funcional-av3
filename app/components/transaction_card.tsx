@@ -24,7 +24,7 @@ export default function TransactionCard({
     return (
         <ul
             ref={listRef}
-            className="flex absolute bottom-0 mb-8 space-x-10 overflow-x-auto justify-start w-[500px] py-6"
+            className="flex space-x-10 absolute bottom-0 mb-6 overflow-x-auto justify-start w-[500px] py-6"
         >
             {transactions.map((transaction) => (
                 <li

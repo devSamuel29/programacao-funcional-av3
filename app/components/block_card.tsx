@@ -25,12 +25,12 @@ export default function BlockCard({ blocks }: IBlockCardProps) {
     return (
         <ul
             ref={listRef}
-            className="flex m-auto w-[100vh] justify-start overflow-x-auto space-x-9 py-4"
+            className="flex w-[1000px] overflow-x-scroll justify-start space-x-9 py-4"
         >
             {blocks.map((block) => (
                 <li
                     key={block.id}
-                    className="flex flex-col border-2 rounded-md p-5 shadow-md min-w-[600px] min-h-[00px] space-y-3 text-xl justify-center overflow-hidden"
+                    className="flex flex-col border-2 rounded-md p-5 shadow-md min-w-[85%] space-y-3 text-xl justify-center"
                 >
                     <section className="flex space-x-3">
                         <span className="font-semibold">Id:</span>
@@ -54,12 +54,12 @@ export default function BlockCard({ blocks }: IBlockCardProps) {
                     </section>
                     <section className="flex space-x-3">
                         <span className="font-semibold">Transações:</span>
-                        <ul className="flex space-x-3 text-xl overflow-x-auto max-w-[600px]">
+                        <ul className="flex text-xl overflow-hidden overflow-x-auto">
                             {block.transactions.length > 0 ? (
                                 block.transactions.map((transaction) => (
                                     <li
                                         key={transaction.id}
-                                        className="pb-3 text-lg min-w-[150px]"
+                                        className="flex flex-col px-3 mb-3 text-lg border-r"
                                     >
                                         <section className="space-x-3">
                                             <span className="font-semibold">

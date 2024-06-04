@@ -3,12 +3,12 @@ import { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import TransactionCard from './components/transaction_card'
 import {
     createTransaction,
     readTransactions,
 } from './data-sources/transactions'
 import Link from 'next/link'
+import TransactionCard from './components/transaction_card'
 
 const schema = z.object({
     value: z.string().refine((val) => parseFloat(val)),
@@ -166,7 +166,7 @@ export default function Index() {
                 (transactions.length > 0 ? (
                     <TransactionCard transactions={transactions} />
                 ) : (
-                    <span className="absolute bottom-0 mb-32 text-gray-300">
+                    <span className="absolute bottom-0 mb-6 text-gray-300">
                         Nenhuma transação para mostrar
                     </span>
                 ))}
